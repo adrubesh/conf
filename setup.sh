@@ -9,9 +9,10 @@ if test ! -d "${CONF_HOME}/.config"; then
 fi
 
 if test ! "$DISABLE_ZSH" = "YES"; then
-	if test ! -f "${CONF_HOME}/.zshrc"; then
+	test ! -f "${CONF_HOME}/.zshrc" && \
 		ln -s "${PWD}/zshrc" "${CONF_HOME}/.zshrc"
-	fi
+	test ! -f "${CONF_HOME}/.zprofile" && \
+		ln -s "${PWD}/zprofile" "${CONF_HOME}/.zprofile"
 fi
 
 
