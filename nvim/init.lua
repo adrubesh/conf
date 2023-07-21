@@ -37,4 +37,8 @@ local setup_coq = function()
 	vim.g.coq_settings = { auto_start = 'shut-up' }
 	return require('coq')
 end
-setup_coq()
+local coq = setup_coq()
+
+--- LSPs
+local lsp = require('lspconfig')
+lsp.ccls.setup(coq.lsp_ensure_capabilities({init_options = { compilationDatabaseDirectory = "builddir"}}))
