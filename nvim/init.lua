@@ -41,4 +41,5 @@ local coq = setup_coq()
 
 --- LSPs
 local lsp = require('lspconfig')
-lsp.ccls.setup(coq.lsp_ensure_capabilities({init_options = { compilationDatabaseDirectory = "builddir"}}))
+-- lsp.ccls.setup(coq.lsp_ensure_capabilities({init_options = { compilationDatabaseDirectory = "builddir"}}))
+lsp.clangd.setup(coq.lsp_ensure_capabilities({cmd = { "clangd", "--background-index", "--clang-tidy" }}))
