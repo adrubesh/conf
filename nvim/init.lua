@@ -19,6 +19,7 @@ require('packer').startup(function(use)
 	use { 'ms-jpq/coq_nvim', branch = 'coq' }
 	use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
 	use { 'ms-jpq/coq.thirdparty', branch = '3p' }
+	use { 'jose-elias-alvarez/null-ls.nvim' }
 end)
 
 -- Telescope
@@ -41,5 +42,7 @@ local coq = setup_coq()
 
 --- LSPs
 local lsp = require('lspconfig')
+local null_ls = require('null-ls')
 -- lsp.ccls.setup(coq.lsp_ensure_capabilities({init_options = { compilationDatabaseDirectory = "builddir"}}))
 lsp.clangd.setup(coq.lsp_ensure_capabilities({cmd = { "clangd", "--background-index", "--clang-tidy" }}))
+lsp.null_ls.setup(coq.lsp_ensure_capabilities({sources = { null_ls.builtins.formatting.
