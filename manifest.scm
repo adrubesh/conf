@@ -12,12 +12,11 @@
         "nss-certs"
         "ninja"
         "meson"
-	"clang"
+	"clang-toolchain"
         "neovim"
         "git"
 	"pkg-config"
 	"cppzmq"
 	"protobuf"
-	"glibc-locales"
 	"zeromq"
 	"lua"))

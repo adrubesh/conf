@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/home/aaron/.local/share/nvim/site/pack/packer/start/coq_nvim",
     url = "https://github.com/ms-jpq/coq_nvim"
   },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/aaron/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/aaron/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
