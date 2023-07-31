@@ -9,3 +9,9 @@ if [ -d "${HOME}/.guix-profile" ]; then
 
 	source "$GUIX_PROFILE/etc/profile"
 fi
+
+if [ -d "${HOME}/go" ]; then
+	export GOBIN="${HOME}/go/bin:$PATH"
+	export PATH="$GOBIN:$PATH"
+	export GOPATH="${HOME}/go"
+fi

@@ -20,6 +20,8 @@ require('packer').startup(function(use)
 	use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
 	use { 'ms-jpq/coq.thirdparty', branch = '3p' }
 	use { 'jose-elias-alvarez/null-ls.nvim' }
+	use { 'ray-x/go.nvim' }
+	use { 'ray-x/guihua.lua' } -- recommended if need floating window support
 end)
 
 -- Telescope
@@ -40,9 +42,28 @@ local setup_coq = function()
 end
 local coq = setup_coq()
 
+--- go
+require('go').setup()
+
 --- LSPs
 local lsp = require('lspconfig')
+local util = require('lspconfig/util')
 local null_ls = require('null-ls')
--- lsp.ccls.setup(coq.lsp_ensure_capabilities({init_options = { compilationDatabaseDirectory = "builddir"}}))
 lsp.clangd.setup(coq.lsp_ensure_capabilities({cmd = { "clangd", "--background-index", "--clang-tidy" }}))
-null_ls.setup({sources = { null_ls.builtins.formatting.clang_format }})
+lsp.gopls.setup(coq.lsp_ensure_capabilities({
+	cmd = {"gopls", "serve"}, 
+	filetypes = {"go", "gomod"}, 
+	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+	settings = {
+		gopls = {
+			analyses = {
+				unusedparams = true,
+			},
+			staticcheck = true,
+		},
+	}}))
+null_ls.setup({sources = { 
+	null_ls.builtins.formatting.clang_format,
+	null_ls.builtins.code_actions.gomodifytags,
+	null_ls.builtins.formatting.gofmt
+}})
