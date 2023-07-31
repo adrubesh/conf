@@ -49,19 +49,25 @@ require('go').setup()
 local lsp = require('lspconfig')
 local util = require('lspconfig/util')
 local null_ls = require('null-ls')
-lsp.clangd.setup(coq.lsp_ensure_capabilities({cmd = { "clangd", "--background-index", "--clang-tidy" }}))
-lsp.gopls.setup(coq.lsp_ensure_capabilities({
-	cmd = {"gopls", "serve"}, 
-	filetypes = {"go", "gomod"}, 
-	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-	settings = {
-		gopls = {
-			analyses = {
-				unusedparams = true,
+
+if vim.fn.executable('clangd') == 1 then
+	lsp.clangd.setup(coq.lsp_ensure_capabilities({cmd = { "clangd", "--background-index", "--clang-tidy" }}))
+end
+if vim.fn.executable('gopls') == 1 then
+	lsp.gopls.setup(coq.lsp_ensure_capabilities({
+		cmd = {"gopls", "serve"}, 
+		filetypes = {"go", "gomod"}, 
+		root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+		settings = {
+			gopls = {
+				analyses = {
+					unusedparams = true,
+				},
+				staticcheck = true,
 			},
-			staticcheck = true,
-		},
-	}}))
+		}}))
+end
+
 null_ls.setup({sources = { 
 	null_ls.builtins.formatting.clang_format,
 	null_ls.builtins.code_actions.gomodifytags,

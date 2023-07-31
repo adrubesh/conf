@@ -10,13 +10,5 @@
         "fd"
         "ripgrep"
         "nss-certs"
-        "ninja"
-        "meson"
-	"clang-toolchain"
         "neovim"
-        "git"
-	"pkg-config"
-	"cppzmq"
-	"protobuf"
-	"zeromq"
-	"lua"))
+        "git"))
