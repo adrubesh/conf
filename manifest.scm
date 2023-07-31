@@ -11,4 +11,6 @@
         "ripgrep"
         "nss-certs"
         "neovim"
+				"tmux"
+				"sway"
         "git"))
